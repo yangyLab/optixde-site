@@ -1,0 +1,42 @@
+site_name: OptiXDE
+site_description: A fast optical-inspired solver for differential equations
+site_url: https://<YOUR_GITHUB_USERNAME>.github.io/<YOUR_SITE_REPO>/
+repo_url: https://github.com/<YOUR_GITHUB_USERNAME>/<YOUR_SITE_REPO>
+repo_name: OptiXDE Site
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  logo: assets/hero.svg
+  favicon: assets/favicon.svg
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - toc.follow
+
+nav:
+  - Home: index.md
+  - Quickstart: quickstart.md
+  - Method: method.md
+  - Benchmarks: benchmarks.md
+  - FAQ: faq.md
+  - Cite & Contact: cite.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/<YOUR_GITHUB_USERNAME>
