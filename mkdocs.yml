@@ -40,4 +40,4 @@ plugins:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/<YOUR_GITHUB_USERNAME>
+      link: https://github.com/yangylab
