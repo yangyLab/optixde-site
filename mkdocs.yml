@@ -1,7 +1,7 @@
 site_name: OptiXDE
 site_description: A fast optical-inspired solver for differential equations
-site_url: https://<YOUR_GITHUB_USERNAME>.github.io/<YOUR_SITE_REPO>/
-repo_url: https://github.com/<YOUR_GITHUB_USERNAME>/<YOUR_SITE_REPO>
+site_url: https://yangylab.github.io/optixde-site/
+repo_url: https://github.com/yangylab/optixde-site
 repo_name: OptiXDE Site
 edit_uri: edit/main/docs/
 
