@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="180" viewBox="0 0 720 180">
+  <rect x="0" y="0" width="720" height="180" rx="24" ry="24" fill="currentColor" opacity="0.08"/>
+  <text x="36" y="78" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial"
+        font-size="44" fill="currentColor" opacity="0.92">OptiXDE</text>
+  <text x="36" y="118" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial"
+        font-size="18" fill="currentColor" opacity="0.75">A fast optical-inspired solver for differential equations</text>
+  <path d="M36 146 C120 110, 200 170, 290 140 S470 140, 684 120" fill="none" stroke="currentColor" stroke-width="3" opacity="0.5"/>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="260" viewBox="0 0 1100 260">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="currentColor" opacity="0.7"/>
+    </marker>
+  </defs>
+
+  <rect x="20" y="60" width="220" height="140" rx="20" fill="currentColor" opacity="0.08"/>
+  <text x="60" y="130" font-family="ui-sans-serif, system-ui" font-size="22" fill="currentColor" opacity="0.9">Field u(x)</text>
+  <text x="60" y="160" font-family="ui-sans-serif, system-ui" font-size="14" fill="currentColor" opacity="0.7">on uniform grid</text>
+
+  <rect x="300" y="60" width="220" height="140" rx="20" fill="currentColor" opacity="0.08"/>
+  <text x="350" y="120" font-family="ui-sans-serif, system-ui" font-size="22" fill="currentColor" opacity="0.9">FFT</text>
+  <text x="350" y="155" font-family="ui-sans-serif, system-ui" font-size="14" fill="currentColor" opacity="0.7">U(k) = F{u}</text>
+
+  <rect x="580" y="60" width="260" height="140" rx="20" fill="currentColor" opacity="0.08"/>
+  <text x="620" y="120" font-family="ui-sans-serif, system-ui" font-size="22" fill="currentColor" opacity="0.9">Propagation</text>
+  <text x="620" y="155" font-family="ui-sans-serif, system-ui" font-size="14" fill="currentColor" opacity="0.7">U(k) ← G(k, Δt) · U(k)</text>
+
+  <rect x="900" y="60" width="180" height="140" rx="20" fill="currentColor" opacity="0.08"/>
+  <text x="940" y="120" font-family="ui-sans-serif, system-ui" font-size="22" fill="currentColor" opacity="0.9">iFFT</text>
+  <text x="940" y="155" font-family="ui-sans-serif, system-ui" font-size="14" fill="currentColor" opacity="0.7">u ← F⁻¹{U}</text>
+
+  <path d="M240 130 L290 130" stroke="currentColor" stroke-width="4" opacity="0.55" marker-end="url(#arrow)"/>
+  <path d="M520 130 L570 130" stroke="currentColor" stroke-width="4" opacity="0.55" marker-end="url(#arrow)"/>
+  <path d="M840 130 L890 130" stroke="currentColor" stroke-width="4" opacity="0.55" marker-end="url(#arrow)"/>
+
+  <text x="20" y="32" font-family="ui-sans-serif, system-ui" font-size="16" fill="currentColor" opacity="0.7">
+    OptiXDE pipeline (public-safe schematic)
+  </text>
+</svg>
