@@ -1,3 +1,9 @@
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+
 site_name: OptiXDE
 site_description: A fast optical-inspired solver for differential equations
 site_url: https://yangylab.github.io/optixde-site/
