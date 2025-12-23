@@ -14,17 +14,29 @@ pip install optixde --extra-index-url <YOUR_PRIVATE_INDEX>
 # (See the "Cite & Contact" page)
 ```
 
-## Minimal example (public)
+## Heat Conduction in 20 Lines: A Minimal Diffusion Solver
 
 ```python
 import numpy as np
-
-# --- placeholder API ---
-# from optixde.solvers.diffusion import diffusion2d_solve
-
-N = 128
-u0 = np.zeros((N, N))
-# u = diffusion2d_solve(u0, dt=..., steps=..., mask=...)
+import matplotlib.pyplot as plt
+from optixde.solvers.base.diffusion import diffusion2d_solve
+Lx=Ly=np.pi
+N=128
+D=1.0
+dt=0.5 
+T=2.0
+steps=int(round(T/dt))
+dx=Lx/(N+1)
+dy=Ly/(N+1)
+x=np.linspace(dx,Lx-dx,N)
+y=np.linspace(dy,Ly-dy,N)
+X,Y=np.meshgrid(x,y,indexing="xy")
+u=np.zeros((N+2,N+2))
+u[1:-1,1:-1]=10*np.sin(X)*np.sin(Y)
+for _ in range(steps): u = diffusion2d_solve(u, D, Lx, Ly, dt, bc="dirichlet")
+plt.imshow(u, cmap="jet", origin="lower", extent=[0,Lx,0,Ly])
+plt.colorbar()
+plt.show()
 ```
 
 ## What to show publicly (recommended)
