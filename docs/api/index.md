@@ -39,11 +39,6 @@ OptiXDE is organized around a small set of building blocks:
 - [`optixde.solvers.base.diffusion`](api/solvers/diffusion.md)
 - [`optixde.solvers.base.etd`](api/solvers/etd.md)
 
-### Solvers (solid)
-
-- [`optixde.solvers.solid.elasticity_static`](api/solvers_solid/elasticity_static.md)
-- [`optixde.solvers.solid.elasticity_dynamic`](api/solvers_solid/elasticity_dynamic.md)
-- [`optixde.solvers.solid.postprocess`](api/solvers_solid/postprocess.md)
 
 ### Post-processing
 
