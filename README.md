@@ -1,32 +1,71 @@
-# OptiXDE Site (Template)
+# OptiXDE
 
-This repository is a **standalone public website** for OptiXDE (marketing + docs), while the main OptiXDE codebase can remain **private**.
+**OptiXDE** is a fast, matrix-free solver for partial differential equations,
+inspired by optical wave propagation and spectral operator theory.
 
-## Quick start (local preview)
+The core idea of OptiXDE is to reformulate elliptic and parabolic PDEs
+(e.g. Poisson, Helmholtz, diffusion) as **spectral propagation problems**,
+leading to highly efficient solvers based on FFT/DCT/DST operators,
+without assembling stiffness matrices.
 
-```bash
-python -m venv .venv
-source .venv/bin/activate  # (Windows) .venv\Scripts\activate
-pip install -r requirements.txt
-mkdocs serve
-```
+---
 
-Open the printed local URL (usually http://127.0.0.1:8000).
+## Key features
 
-## Deploy to GitHub Pages
+- **Optical-inspired formulation**  
+  PDE operators are treated as spectral propagators, analogous to
+  angular-spectrum wave propagation.
 
-1. Push this repository to GitHub (public).
-2. In GitHub: **Settings → Pages**
-   - Source: **Deploy from a branch**
-   - Branch: **gh-pages** / **root**
-3. Every push to `main` will auto-deploy via GitHub Actions.
+- **Matrix-free and FFT-based**  
+  No sparse matrix assembly; all operators are applied via FFT/DCT/DST.
 
-## Customize
+- **Multiple boundary conditions**  
+  Periodic, Dirichlet, Neumann, and inhomogeneous Dirichlet problems are supported.
 
-- Edit `mkdocs.yml` (site name, repo_url, nav).
-- Edit `docs/index.md` (landing page).
-- Put images in `docs/assets/`.
+- **Backend-agnostic**  
+  Unified support for NumPy (CPU), CuPy (GPU), and PyTorch backends.
 
-## License
+- **Embedded and complex geometries**  
+  Built-in geometry primitives and Boolean operations enable embedded-domain
+  formulations via smooth masks and penalty methods.
 
-Use your preferred license for the website content (optional). The template does not include a license by default.
+---
+
+## Scope of the library
+
+OptiXDE currently focuses on:
+
+- Poisson and Helmholtz equations
+- Diffusion equations and exponential time differencing (ETD)
+- Spectral Green’s operators and propagators
+- Geometry construction and embedded-domain handling
+- Post-processing and visualization utilities
+
+Extensions to solid mechanics and time-dependent problems are under active development.
+
+---
+
+## Documentation
+
+- **Quickstart**: installation and minimal examples  
+- **Method**: mathematical formulation and operator interpretation  
+- **Benchmarks**: representative numerical tests  
+- **API Reference**: detailed documentation of all modules and functions
+
+Use the navigation bar above to explore the documentation.
+
+---
+
+## Project status
+
+OptiXDE is an **active research codebase**.
+The website is public for documentation and reproducibility,
+while the core solver implementation may remain private during ongoing research.
+
+---
+
+## Citation
+
+If you use OptiXDE in academic work, please cite the corresponding paper
+(to be announced).
+
