@@ -1,7 +1,9 @@
 # OptiXDE
 
-**OptiXDE** is a fast, matrix-free solver for partial differential equations,
-inspired by optical wave propagation and spectral operator theory.
+**OptiXDE connects physics, algorithms, and future computing.**
+
+A fast optical-inspired, matrix-free solver for differential equations,
+designed for modern GPU architectures and operator-based computation.
 
 The core idea of OptiXDE is to reformulate elliptic and parabolic PDEs
 (e.g. Poisson, Helmholtz, diffusion) as **spectral propagation problems**,
