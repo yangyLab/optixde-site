@@ -24,7 +24,7 @@ nav:
   - Method: method.md
   - Benchmarks: benchmarks.md
   - API:
-      - Overview: api/api.md
+      - Overview: api/index.md
       - optixde.fft_backend.base: api/fft_backend/base.md
       - optixde.fft_backend.numpy_backend: api/fft_backend/numpy_backend.md
       - optixde.fft_backend.torch_backend: api/fft_backend/torch_backend.md
