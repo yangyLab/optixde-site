@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="260" viewBox="0 0 1200 260" role="img" aria-label="OptiXDE logo">
+  <defs>
+    <style>
+      .word { font-family: Inter, "Source Sans 3", "IBM Plex Sans", "Segoe UI", Arial, sans-serif; font-weight: 700; }
+      .tag  { font-family: Inter, "Source Sans 3", "IBM Plex Sans", "Segoe UI", Arial, sans-serif; font-weight: 500; }
+    </style>
+
+    <!-- subtle optical motif: concentric rings -->
+    <radialGradient id="ringFade" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#00AABE" stop-opacity="0.20"></stop>
+      <stop offset="40%" stop-color="#00AABE" stop-opacity="0.08"></stop>
+      <stop offset="100%" stop-color="#00AABE" stop-opacity="0.00"></stop>
+    </radialGradient>
+
+    <mask id="softMask">
+      <rect x="0" y="0" width="1200" height="260" fill="white"></rect>
+      <linearGradient id="fadeRight" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="white" stop-opacity="1"></stop>
+        <stop offset="70%" stop-color="white" stop-opacity="1"></stop>
+        <stop offset="100%" stop-color="white" stop-opacity="0.85"></stop>
+      </linearGradient>
+      <rect x="0" y="0" width="1200" height="260" fill="url(#fadeRight)"></rect>
+    </mask>
+  </defs>
+
+  <!-- mark (left) -->
+  <g transform="translate(70,40)">
+    <!-- optical rings -->
+    <g opacity="1" mask="url(#softMask)">
+      <circle cx="90" cy="90" r="86" fill="none" stroke="#00AABE" stroke-opacity="0.10" stroke-width="6"></circle>
+      <circle cx="90" cy="90" r="62" fill="none" stroke="#00AABE" stroke-opacity="0.12" stroke-width="6"></circle>
+      <circle cx="90" cy="90" r="38" fill="none" stroke="#00AABE" stroke-opacity="0.16" stroke-width="6"></circle>
+      <circle cx="90" cy="90" r="16" fill="url(#ringFade)"></circle>
+    </g>
+
+    <!-- stylized X -->
+    <path d="M40 40 L140 140" stroke="#00AABE" stroke-width="16" stroke-linecap="round"></path>
+    <path d="M140 40 L40 140" stroke="#1C3A5E" stroke-width="16" stroke-linecap="round"></path>
+  </g>
+
+  <!-- wordmark -->
+  <text x="270" y="120" class="word" font-size="92" fill="#1C3A5E" letter-spacing="0.5">
+    Opti
+  </text>
+  <text x="465" y="120" class="word" font-size="98" fill="#00AABE" letter-spacing="0.5">
+    X
+  </text>
+  <text x="525" y="120" class="word" font-size="92" fill="#1C3A5E" letter-spacing="0.5">
+    DE
+  </text>
+
+  <!-- tagline (updated CN) -->
+  <text x="272" y="182" class="tag" font-size="34" fill="#1C3A5E" opacity="0.92">
+    连接物理、算法与未来计算
+  </text>
+  <text x="272" y="222" class="tag" font-size="26" fill="#1C3A5E" opacity="0.70">
+    Connecting Physics, Algorithms, and Future Computing
+  </text>
+</svg>
