@@ -1,9 +1,3 @@
-markdown_extensions:
-  - pymdownx.highlight:
-      anchor_linenums: true
-  - pymdownx.superfences
-  - pymdownx.inlinehilite
-
 site_name: OptiXDE
 site_description: A fast optical-inspired solver for differential equations
 site_url: https://yangylab.github.io/optixde-site/
@@ -29,24 +23,24 @@ nav:
   - Quickstart: quickstart.md
   - Method: method.md
   - Benchmarks: benchmarks.md
-  - API: api.md
-    - Overview: api/index.md
-    - optixde.fft_backend.base: api/fft_backend/base.md
-    - optixde.fft_backend.numpy_backend: api/fft_backend/numpy_backend.md
-    - optixde.fft_backend.torch_backend: api/fft_backend/torch_backend.md
-    - optixde.operators.transforms: api/operators/transforms.md
-    - optixde.operators.spectral: api/operators/spectral.md
-    - optixde.geometry.primitives: api/geometry/primitives.md
-    - optixde.geometry.boolean: api/geometry/boolean.md
-    - optixde.solvers.base.poisson: api/solvers/poisson.md
-    - optixde.solvers.base.poisson_inhom: api/solvers/poisson_inhom.md
-    - optixde.solvers.base.helmholtz: api/solvers/helmholtz.md
-    - optixde.solvers.base.diffusion: api/solvers/diffusion.md
-    - optixde.solvers.base.etd: api/solvers/etd.md
-    - optixde.solvers.solid.elasticity_static: api/solvers_solid/elasticity_static.md
-    - optixde.solvers.solid.elasticity_dynamic: api/solvers_solid/elasticity_dynamic.md
-    - optixde.solvers.solid.postprocess: api/solvers_solid/postprocess.md
-    - optixde.post.plotting: api/post/plotting.md
+  - API:
+      - Overview: api.md
+      - optixde.fft_backend.base: api/fft_backend/base.md
+      - optixde.fft_backend.numpy_backend: api/fft_backend/numpy_backend.md
+      - optixde.fft_backend.torch_backend: api/fft_backend/torch_backend.md
+      - optixde.operators.transforms: api/operators/transforms.md
+      - optixde.operators.spectral: api/operators/spectral.md
+      - optixde.geometry.primitives: api/geometry/primitives.md
+      - optixde.geometry.boolean: api/geometry/boolean.md
+      - optixde.solvers.base.poisson: api/solvers/poisson.md
+      - optixde.solvers.base.poisson_inhom: api/solvers/poisson_inhom.md
+      - optixde.solvers.base.helmholtz: api/solvers/helmholtz.md
+      - optixde.solvers.base.diffusion: api/solvers/diffusion.md
+      - optixde.solvers.base.etd: api/solvers/etd.md
+      - optixde.solvers.solid.elasticity_static: api/solvers_solid/elasticity_static.md
+      - optixde.solvers.solid.elasticity_dynamic: api/solvers_solid/elasticity_dynamic.md
+      - optixde.solvers.solid.postprocess: api/solvers_solid/postprocess.md
+      - optixde.post.plotting: api/post/plotting.md
   - FAQ: faq.md
   - Cite & Contact: cite.md
 
@@ -56,6 +50,10 @@ markdown_extensions:
   - md_in_html
   - toc:
       permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
 
 plugins:
   - search
