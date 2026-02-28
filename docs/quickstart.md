@@ -14,7 +14,7 @@ pip install optixde --extra-index-url <YOUR_PRIVATE_INDEX>
 # (See the "Cite & Contact" page)
 ```
 
-## Heat Conduction in 20 Lines: A Minimal Diffusion Solver
+## A minimal diffusion solving using 20 Lines
 
 ```python
 import numpy as np
