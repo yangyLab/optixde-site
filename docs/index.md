@@ -1,4 +1,3 @@
-# OptiXDE
 ![OptiXDE](assets/optixde_logo_horizontal.svg)
 **OptiXDE** is a fast optical-inspired solver for differential equations.
 
