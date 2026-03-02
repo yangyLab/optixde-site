@@ -34,16 +34,29 @@ A **matrix-free spectral propagation-operator** approach (FFT → propagate → 
 
 ---
 
-## 20-line teaser (pseudo-code)
+## A minimal diffusion solving using 20 Lines
 
 ```python
-# PSEUDO-CODE (for the public site)
-u = u0
-for n in range(steps):
-    U = fft2(u)
-    U = G_kdt * U          # propagation / Green's operator in k-space
-    u = ifft2(U).real
-    u = apply_penalty(u, mask, boundary_data)  # for embedded domains
+import numpy as np
+import matplotlib.pyplot as plt
+from optixde.solvers.base.diffusion import diffusion2d_solve
+Lx=Ly=np.pi
+N=128
+D=1.0
+dt=0.5 
+T=2.0
+steps=int(round(T/dt))
+dx=Lx/(N+1)
+dy=Ly/(N+1)
+x=np.linspace(dx,Lx-dx,N)
+y=np.linspace(dy,Ly-dy,N)
+X,Y=np.meshgrid(x,y,indexing="xy")
+u=np.zeros((N+2,N+2))
+u[1:-1,1:-1]=10*np.sin(X)*np.sin(Y)
+for _ in range(steps): u = diffusion2d_solve(u, D, Lx, Ly, dt, bc="dirichlet")
+plt.imshow(u, cmap="jet", origin="lower", extent=[0,Lx,0,Ly])
+plt.colorbar()
+plt.show()
 ```
 
 ---
