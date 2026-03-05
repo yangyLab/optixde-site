@@ -33,6 +33,6 @@ from optixde.post.plotting import show_geometry
 geo = Rectangle(0.0, 1.0, 0.0, 1.0)
 show_geometry(geo, title="Rectangle", facecolor="skyblue", edgecolor="black")
 ```
-![Rectangle result](images/rectangle.png)
+![Rectangle result](image/Rectangle.png)
 
 
