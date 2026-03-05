@@ -35,7 +35,7 @@ from optixde.post.plotting import show_geometry
 geo = Rectangle(0.0, 1.0, 0.0, 1.0)
 show_geometry(geo, title="Rectangle", facecolor="skyblue", edgecolor="black")
 ```
-<img src="image/Rectangle.png" alt="Rectangle result" width="60%" />
+![Rectangle result](image/Rectangle.png)
 
 ### Example 2: Disk
 ```python
@@ -45,7 +45,7 @@ from optixde.post.plotting import show_geometry
 geo = Disk((0.5, 0.5), 0.25)
 show_geometry(geo, title="Disk", facecolor="tomato", edgecolor="black")
 ```
-<img src="image/Disk.png" alt="Disk result" width="60%" />
+![Rectangle result](image/Disk.png)
 
 ### Example 3: Polygon
 ```python
@@ -62,4 +62,4 @@ geo = Polygon([
 ])
 show_geometry(geo, title="Polygon", facecolor="gold", edgecolor="black")
 ```
-<img src="image/Polygon.png" alt="Polygon result" width="60%" />
+![Rectangle result](image/Polygon.png)
