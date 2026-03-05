@@ -45,7 +45,5 @@ from optixde.post.plotting import show_geometry
 geo = Disk((0.5, 0.5), 0.25)
 show_geometry(geo, title="Disk", facecolor="tomato", edgecolor="black")
 ```
-
-**Result**
 <img src="image/Disk.png" alt="Disk result" width="60%" />
 
