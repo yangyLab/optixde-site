@@ -26,6 +26,8 @@ This keeps the API simple while allowing complex shapes, and it’s safe to shar
 ## 1) Create a geometry (primitives)
 OptiXDE provides simple 2D primitives that can be composed later with CSG operations.
 Here are three basic examples.
+
+### Example 1: Rectangle
 ```python
 from optixde.geometry.primitives import Rectangle
 from optixde.post.plotting import show_geometry
@@ -36,8 +38,6 @@ show_geometry(geo, title="Rectangle", facecolor="skyblue", edgecolor="black")
 <img src="image/Rectangle.png" alt="Rectangle result" width="60%" />
 
 ### Example 2: Disk
-
-**Code**
 ```python
 from optixde.geometry.primitives import Disk
 from optixde.post.plotting import show_geometry
@@ -47,3 +47,19 @@ show_geometry(geo, title="Disk", facecolor="tomato", edgecolor="black")
 ```
 <img src="image/Disk.png" alt="Disk result" width="60%" />
 
+### Example 3: Polygon
+```python
+from optixde.geometry.primitives import Polygon
+from optixde.post.plotting import show_geometry
+
+geo = Polygon([
+    (1.0, 0.0),
+    (0.5, 0.8660254),
+    (-0.5, 0.8660254),
+    (-1.0, 0.0),
+    (-0.5, -0.8660254),
+    (0.5, -0.8660254),
+])
+show_geometry(geo, title="Polygon", facecolor="gold", edgecolor="black")
+```
+<img src="image/Polygon.png" alt="Polygon result" width="60%" />
