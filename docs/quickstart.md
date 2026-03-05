@@ -35,4 +35,17 @@ show_geometry(geo, title="Rectangle", facecolor="skyblue", edgecolor="black")
 ```
 <img src="image/Rectangle.png" alt="Rectangle result" width="60%" />
 
+### Example 2: Disk
+
+**Code**
+```python
+from optixde.geometry.primitives import Disk
+from optixde.post.plotting import show_geometry
+
+geo = Disk((0.5, 0.5), 0.25)
+show_geometry(geo, title="Disk", facecolor="tomato", edgecolor="black")
+```
+
+**Result**
+<img src="image/Disk.png" alt="Disk result" width="60%" />
 
