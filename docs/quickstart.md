@@ -109,6 +109,7 @@ show_geometry(
     edgecolor="black",
 )
 ```
+![Interaction result](image/Interaction.png)
 
 #### Example: Difference of a rectangle and a disk
 
