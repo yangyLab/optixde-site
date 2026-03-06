@@ -64,7 +64,7 @@ show_geometry(geo, title="Polygon", facecolor="gold", edgecolor="black")
 ```
 ![Polygon result](image/Polygon.png)
 
-### 2) Boolean (primitives)
+### 2) Apply boolean operations
 Boolean operations combine simple primitives into more complex shapes. In OptiXDE, the most common operations are:
 
 -  : union
@@ -131,3 +131,49 @@ show_geometry(
 )
 ```
 ![Difference result](image/Difference.png)
+
+### 3) From geometry to mask field
+
+OptiXDE represents geometry on an FFT-compatible uniform grid as a mask field.
+
+#### Example: geometry to binary mask
+The geometry can be sampled on a uniform Cartesian grid and represented as a mask field.  
+In this example, an L-shaped domain is created by subtracting the square `[0,1] × [0,1]` from the outer square `[-1,1] × [-1,1]`. The geometry is evaluated on a regular grid, and a smoothed mask is generated for visualization and for later use in embedded-domain solving.
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+from optixde.geometry.primitives import Rectangle
+from optixde.geometry.boolean import Difference
+
+x = np.linspace(-1.0, 1.0, 257)
+y = np.linspace(-1.0, 1.0, 257)
+X, Y = np.meshgrid(x, y, indexing="xy")
+P = np.c_[X.ravel(), Y.ravel()]
+
+geo = Difference(
+    Rectangle(-1.0, 1.0, -1.0, 1.0),
+    Rectangle(0.0, 1.0, 0.0, 1.0),
+)
+
+eps = 2.0 * (x[1] - x[0])
+mask = geo.smooth_mask(P, eps=eps).reshape(len(y), len(x))
+
+plt.figure(figsize=(6.2, 5.2))
+plt.imshow(
+    mask,
+    origin="lower",
+    cmap="jet",
+    extent=[x[0], x[-1], y[0], y[-1]],
+)
+plt.colorbar(label="mask")
+plt.title("Smoothed mask")
+plt.tight_layout()
+plt.show()
+```
+![Mask result](image/Mask.png)
+
+### 3) define PDE
+
+### 4) solve and visualize
+
