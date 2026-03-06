@@ -109,7 +109,7 @@ show_geometry(
     edgecolor="black",
 )
 ```
-![Interaction result](image/Interaction.png)
+![Intersection result](image/Intersection.png)
 
 #### Example: Difference of a rectangle and a disk
 
