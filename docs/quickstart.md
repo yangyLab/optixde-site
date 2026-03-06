@@ -78,10 +78,14 @@ Below are three minimal examples using `Rectangle`, `Disk`, and `Polygon`.
 #### Example 1: Union of two rectangles
 
 ```python
-from optixde.geometry import Rectangle
+from optixde.geometry.primitives import Rectangle, Disk
+from optixde.post.plotting import show_geometry
+from optixde.geometry.boolean import Union
 
-geo = Rectangle(xmin=(-1.2, -0.6), xmax=(0.2, 0.6)) | Rectangle(
-    xmin=(-0.2, -0.6), xmax=(1.2, 0.6)
-)
+rect = Rectangle(0.0, 1.0, 0.0, 1.0)
+left_circle  = Disk((0.0, 0.5), 0.2)
+right_circle = Disk((1.0, 0.5), 0.2)
+geo = Union(rect, left_circle, right_circle)
+show_geometry(geo, title="Rectangle", facecolor="skyblue", edgecolor="black")
+```
 
-geo.plot_geometry()
