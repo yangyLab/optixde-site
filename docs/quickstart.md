@@ -13,7 +13,7 @@ pip install optixde --extra-index-url <YOUR_PRIVATE_INDEX>
 # Option B: request access to the private repo
 # (See the "Cite & Contact" page)
 ```
-# Geometry Construction Tutorial
+## Geometry Construction Tutorial
 
 OptiXDE runs on an FFT-compatible uniform grid, so geometry is represented **implicitly** as a *mask field* on that grid (not a mesh). The recommended public-facing pipeline is:
 
@@ -23,11 +23,11 @@ This keeps the API simple while allowing complex shapes, and it’s safe to shar
 
 ---
 
-## 1) Create a geometry (primitives)
+### 1) Create a geometry (primitives)
 OptiXDE provides simple 2D primitives that can be composed later with CSG operations.
 Here are three basic examples.
 
-### Example 1: Rectangle
+#### Example 1: Rectangle
 ```python
 from optixde.geometry.primitives import Rectangle
 from optixde.post.plotting import show_geometry
@@ -37,7 +37,7 @@ show_geometry(geo, title="Rectangle", facecolor="skyblue", edgecolor="black")
 ```
 ![Rectangle result](image/Rectangle.png)
 
-### Example 2: Disk
+#### Example 2: Disk
 ```python
 from optixde.geometry.primitives import Disk
 from optixde.post.plotting import show_geometry
@@ -47,7 +47,7 @@ show_geometry(geo, title="Disk", facecolor="tomato", edgecolor="black")
 ```
 ![Rectangle result](image/Disk.png)
 
-### Example 3: Polygon
+#### Example 3: Polygon
 ```python
 from optixde.geometry.primitives import Polygon
 from optixde.post.plotting import show_geometry
@@ -63,3 +63,25 @@ geo = Polygon([
 show_geometry(geo, title="Polygon", facecolor="gold", edgecolor="black")
 ```
 ![Rectangle result](image/Polygon.png)
+
+### 2) Boolean (primitives)
+Boolean operations combine simple primitives into more complex shapes. In OptiXDE, the most common operations are:
+
+- `|` : union
+- `&` : intersection
+- `-` : difference
+
+Below are three minimal examples using `Rectangle`, `Disk`, and `Polygon`.
+
+---
+
+#### Example 1: Union of two rectangles
+
+```python
+from optixde.geometry import Rectangle
+
+geo = Rectangle(xmin=(-1.2, -0.6), xmax=(0.2, 0.6)) | Rectangle(
+    xmin=(-0.2, -0.6), xmax=(1.2, 0.6)
+)
+
+geo.plot_geometry()
