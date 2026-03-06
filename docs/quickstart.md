@@ -89,3 +89,26 @@ geo = Union(rect, left_circle, right_circle)
 show_geometry(geo, title="Rectangle", facecolor="skyblue", edgecolor="black")
 ```
 ![Union result](image/Union.png)
+
+#### Example: Intersection of a rectangle and a disk
+
+```python
+from optixde.geometry.primitives import Rectangle, Disk
+from optixde.geometry.boolean import Intersection
+from optixde.post.plotting import show_geometry
+
+rect = Rectangle(-0.8, 0.8, -0.8, 0.8)
+disk = Disk((0.3, 0.0), 0.75)
+
+geo = Intersection(rect, disk)
+
+show_geometry(
+    geo,
+    title="Rectangle ∩ Disk",
+    facecolor="skyblue",
+    edgecolor="black",
+)
+```
+![Intersection result](image/Intersection.png)
+
+
