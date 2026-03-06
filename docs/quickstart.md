@@ -88,4 +88,4 @@ right_circle = Disk((1.0, 0.5), 0.2)
 geo = Union(rect, left_circle, right_circle)
 show_geometry(geo, title="Rectangle", facecolor="skyblue", edgecolor="black")
 ```
-
+![Rectangle result](image/Union.png)
