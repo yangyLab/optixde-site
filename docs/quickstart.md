@@ -62,20 +62,20 @@ geo = Polygon([
 ])
 show_geometry(geo, title="Polygon", facecolor="gold", edgecolor="black")
 ```
-![Rectangle result](image/Polygon.png)
+![Polygon result](image/Polygon.png)
 
 ### 2) Boolean (primitives)
 Boolean operations combine simple primitives into more complex shapes. In OptiXDE, the most common operations are:
 
-- `|` : union
-- `&` : intersection
-- `-` : difference
+-  : union
+-  : intersection
+-  : difference
 
 Below are three minimal examples using `Rectangle`, `Disk`, and `Polygon`.
 
 ---
 
-#### Example 1: Union of two rectangles
+#### Example 1: Union
 
 ```python
 from optixde.geometry.primitives import Rectangle, Disk
@@ -88,4 +88,4 @@ right_circle = Disk((1.0, 0.5), 0.2)
 geo = Union(rect, left_circle, right_circle)
 show_geometry(geo, title="Rectangle", facecolor="skyblue", edgecolor="black")
 ```
-![Rectangle result](image/Union.png)
+![Union result](image/Union.png)
