@@ -75,7 +75,7 @@ Below are three minimal examples using `Rectangle`, `Disk`, and `Polygon`.
 
 ---
 
-#### Example 1: Union
+#### Example 1: Union of a rectangle and two circle
 
 ```python
 from optixde.geometry.primitives import Rectangle, Disk
@@ -109,6 +109,24 @@ show_geometry(
     edgecolor="black",
 )
 ```
-![Intersection result](image/Intersection.png)
 
+#### Example: Difference of a rectangle and a disk
 
+```python
+from optixde.geometry.primitives import Rectangle, Disk
+from optixde.geometry.boolean import Difference
+from optixde.post.plotting import show_geometry
+
+rect = Rectangle(-1.0, 1.0, -0.8, 0.8)
+hole = Disk((0.0, 0.0), 0.35)
+
+geo = Difference(rect, hole)
+
+show_geometry(
+    geo,
+    title="Difference",
+    facecolor="skyblue",
+    edgecolor="black",
+)
+```
+![Difference result](image/Difference.png)
