@@ -173,7 +173,7 @@ plt.show()
 ```
 ![Mask result](image/Mask.png)
 
-### 3) Define, solve, and visualize a PDE
+### 4) Define, solve, and visualize a PDE
 
 Once the computational grid and source term are prepared, solving a PDE in OptiXDE is straightforward.
 
