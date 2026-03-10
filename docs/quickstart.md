@@ -173,7 +173,54 @@ plt.show()
 ```
 ![Mask result](image/Mask.png)
 
-### 3) define PDE
+### 3) Define, solve, and visualize a PDE
 
-### 4) solve and visualize
+Once the computational grid and source term are prepared, solving a PDE in OptiXDE is straightforward.
+
+In this example, we consider the 2D Poisson equation on the square domain `[0, \pi] \times [0, \pi]` with homogeneous Dirichlet boundary conditions,
+\[
+-\Delta u = f \quad \text{in } \Omega,
+\]
+where the right-hand side is chosen as
+\[
+f(x,y)=2\sin(x)\sin(y).
+\]
+For this choice, the exact solution is
+\[
+u(x,y)=\sin(x)\sin(y),
+\]
+which makes the example convenient for verification. After defining the source field on the uniform grid, the Poisson solver is called directly, and the resulting solution is visualized as a color map. This illustrates the basic OptiXDE workflow: define the PDE, solve it on the FFT-compatible grid, and inspect the result immediately.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from optixde.solvers.base.poisson import poisson2d_solve
+
+Lx = Ly = np.pi
+N = 128
+
+dx = Lx / (N + 1)
+dy = Ly / (N + 1)
+x = np.linspace(dx, Lx - dx, N)
+y = np.linspace(dy, Ly - dy, N)
+X, Y = np.meshgrid(x, y, indexing="xy")
+
+f = np.zeros((N + 2, N + 2))
+f[1:-1, 1:-1] = 2.0 * np.sin(X) * np.sin(Y)
+
+u = poisson2d_solve(f, Lx, Ly, bc="dirichlet", workers=8)
+
+plt.figure(figsize=(6.2, 5.2))
+plt.imshow(
+    u,
+    cmap="jet",
+    origin="lower",
+    extent=[0, Lx, 0, Ly],
+)
+plt.colorbar(label="u")
+plt.title("2D Poisson solution")
+plt.xlabel("x")
+plt.ylabel("y")
+plt.show()
+```
 
