@@ -177,7 +177,7 @@ plt.show()
 
 Once the computational grid and source term are prepared, solving a PDE in OptiXDE is straightforward.
 
-In this example, we consider the 2D Poisson equation on the square domain $[0, \pi] \times [0, \pi]$ with homogeneous Dirichlet boundary conditions,
+In this example, we consider the 2D Poisson equation on the square domain `[0, \pi] \times [0, \pi]` with homogeneous Dirichlet boundary conditions,
 \[
 -\Delta u = f \quad \text{in } \Omega,
 \]
