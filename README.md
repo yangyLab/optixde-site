@@ -43,7 +43,8 @@ OptiXDE currently focuses on:
 - Geometry construction and embedded-domain handling
 - Post-processing and visualization utilities
 
-Extensions to solid mechanics and time-dependent problems are under active development.
+Nonlinear evolution equations, wave propagation, and incompressible-flow
+solvers are included alongside the elliptic and diffusion kernels.
 
 ---
 
@@ -70,4 +71,3 @@ while the core solver implementation may remain private during ongoing research.
 
 If you use OptiXDE in academic work, please cite the corresponding paper
 (to be announced).
-

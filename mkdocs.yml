@@ -25,22 +25,15 @@ nav:
   - Benchmarks: benchmarks.md
   - API:
       - Overview: api/index.md
-      - optixde.fft_backend.base: api/fft_backend/base.md
-      - optixde.fft_backend.numpy_backend: api/fft_backend/numpy_backend.md
-      - optixde.fft_backend.torch_backend: api/fft_backend/torch_backend.md
-      - optixde.operators.transforms: api/operators/transforms.md
-      - optixde.operators.spectral: api/operators/spectral.md
-      - optixde.geometry.primitives: api/geometry/primitives.md
-      - optixde.geometry.boolean: api/geometry/boolean.md
-      - optixde.solvers.base.poisson: api/solvers/poisson.md
-      - optixde.solvers.base.poisson_inhom: api/solvers/poisson_inhom.md
-      - optixde.solvers.base.helmholtz: api/solvers/helmholtz.md
-      - optixde.solvers.base.diffusion: api/solvers/diffusion.md
-      - optixde.solvers.base.etd: api/solvers/etd.md
-      - optixde.solvers.solid.elasticity_static: api/solvers_solid/elasticity_static.md
-      - optixde.solvers.solid.elasticity_dynamic: api/solvers_solid/elasticity_dynamic.md
-      - optixde.solvers.solid.postprocess: api/solvers_solid/postprocess.md
-      - optixde.post.plotting: api/post/plotting.md
+      - Conventions & diagnostics: api/conventions.md
+      - FFT backends: api/backends.md
+      - Spectral operators: api/operators.md
+      - Geometry & boundary conditions: api/geometry-boundaries.md
+      - Elliptic solvers: api/elliptic.md
+      - Evolution equations: api/evolution.md
+      - Flow solvers: api/flows.md
+      - Embedded domains: api/embedded.md
+      - Post-processing: api/postprocessing.md
   - FAQ: faq.md
   - Cite & Contact: cite.md
 
