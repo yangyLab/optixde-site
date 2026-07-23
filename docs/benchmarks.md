@@ -14,6 +14,7 @@ timing or error data are used.
 | 1D viscous Burgers | FFT splitting with odd periodic extension | Cole--Hopf quadrature | Approximately second-order temporal convergence |
 | 2D Allen--Cahn | Spectral diffusion and exact reaction, Strang splitting | Independent Fourier ETDRK4 | Second-order temporal convergence and monotone free-energy decay |
 | 1D cubic Schrödinger | Split-step Fourier method | Fine-grid Fourier RK4 | Near second-order behavior before the spatial/reference error floor |
+| 2D Navier--Stokes | Periodic vorticity--streamfunction FFT splitting | Taylor--Green analytical decay | Vorticity, divergence, and enstrophy agree to near machine precision |
 
 !!! note "Interpreting the tables"
     Rates are computed between successive timestep or grid refinements. A
@@ -181,6 +182,65 @@ spatial/reference floor. Mass remains conserved to approximately
 
 Script:
 [`schrodinger_raissi_3_1_1_reproduction.py`](https://github.com/yangyLab/OptiXDE/blob/main/examples/base/schrodinger_raissi_3_1_1_reproduction.py)
+
+## Two-dimensional Navier--Stokes equation
+
+The Taylor--Green vortex verifies the periodic incompressible
+vorticity--streamfunction solver. On
+\([0,2\pi)^2\), the initial vorticity is
+
+\[
+\omega(x,y,0)=2\sin x\sin y,
+\]
+
+and the exact viscous decay is
+
+\[
+\omega_{\mathrm{ex}}(x,y,t)
+=
+2\exp(-2\nu t)\sin x\sin y.
+\]
+
+The corresponding velocity remains divergence free, and the enstrophy
+
+\[
+\mathcal{Z}(t)
+=
+\frac12\int_\Omega\omega^2\,d\Omega
+\]
+
+decays as
+\(\mathcal{Z}(t)=\mathcal{Z}(0)\exp(-4\nu t)\).
+
+The reported run uses a \(128^2\) periodic grid,
+\(\nu=0.05\), \(\Delta t=10^{-3}\), and \(T=1\). OptiXDE applies exact
+Fourier diffusion half-steps, midpoint RK2 for the conservative vorticity flux,
+and two-thirds de-aliasing.
+
+![Taylor--Green vorticity, exact solution, and pointwise error](assets/figures/benchmarks/taylor_green_vorticity.png)
+
+[Download the vector PDF](assets/figures/benchmarks/taylor_green_vorticity.pdf)
+
+| Diagnostic | Value |
+|---|---:|
+| Relative \(L^2\) vorticity error | \(2.906326\times10^{-13}\) |
+| Maximum pointwise vorticity error | \(7.236434\times10^{-13}\) |
+| Maximum \(\lvert\nabla\cdot\mathbf{u}\rvert\) | \(2.231548\times10^{-14}\) |
+| RMS velocity divergence | \(5.840040\times10^{-15}\) |
+| Initial enstrophy | \(1.973920880218\times10^{1}\) |
+| Final enstrophy | \(1.616109728778\times10^{1}\) |
+| Exact final enstrophy | \(1.616109728777\times10^{1}\) |
+| Relative enstrophy error | \(5.680439\times10^{-13}\) |
+| Maximum final speed | \(9.048374\times10^{-1}\) |
+
+The Taylor--Green field is a single resolved Fourier-mode configuration whose
+nonlinear vorticity advection vanishes analytically. The near-machine-precision
+result therefore verifies spectral differentiation, velocity reconstruction,
+viscous propagation, and incompressibility for this special solution. It should
+not be interpreted as the expected error for a broadband turbulent flow.
+
+Script:
+[`navier_stokes_taylor_green.py`](https://github.com/yangyLab/OptiXDE/blob/main/examples/base/navier_stokes_taylor_green.py)
 
 ## Reproducibility notes
 
