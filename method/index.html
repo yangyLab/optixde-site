@@ -1,0 +1,1639 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A fast optical-inspired solver for differential equations">
+      
+      
+      
+        <link rel="canonical" href="https://yangylab.github.io/optixde-site/method/">
+      
+      
+        <link rel="prev" href="../quickstart/">
+      
+      
+        <link rel="next" href="../benchmarks/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Method - OptiXDE</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#method" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="OptiXDE" class="md-header__button md-logo" aria-label="OptiXDE" data-md-component="logo">
+      
+  <img src="../assets/hero.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OptiXDE
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Method
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/yangylab/optixde-site" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    OptiXDE Site
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../quickstart/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Quickstart
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Method
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../benchmarks/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Benchmarks
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../api/" class="md-tabs__link">
+          
+  
+  
+  API
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../faq/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  FAQ
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../cite/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Cite & Contact
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="OptiXDE" class="md-nav__button md-logo" aria-label="OptiXDE" data-md-component="logo">
+      
+  <img src="../assets/hero.svg" alt="logo">
+
+    </a>
+    OptiXDE
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/yangylab/optixde-site" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    OptiXDE Site
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Method
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Method
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-core-idea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Core idea
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-discrete-spectral-grid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Discrete spectral grid
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-linear-propagation-and-inversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Linear propagation and inversion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-nonlinear-equations-and-splitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Nonlinear equations and splitting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-boundary-conditions-on-rectangles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Boundary conditions on rectangles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-geometry-and-embedded-domains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Geometry and embedded domains
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Geometry and embedded domains">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#signed-distance-convention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Signed-distance convention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#masks-and-boundary-bands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Masks and boundary bands
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#current-embedded-domain-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Current embedded-domain paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-implementation-and-complexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Implementation and complexity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-accuracy-and-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Accuracy and scope
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../benchmarks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Benchmarks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/conventions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conventions & diagnostics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/backends/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FFT backends
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/operators/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spectral operators
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/geometry-boundaries/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geometry & boundary conditions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/elliptic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Elliptic solvers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/evolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evolution equations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/flows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flow solvers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/embedded/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Embedded domains
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/postprocessing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Post-processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cite & Contact
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-core-idea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Core idea
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-discrete-spectral-grid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Discrete spectral grid
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-linear-propagation-and-inversion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Linear propagation and inversion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-nonlinear-equations-and-splitting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Nonlinear equations and splitting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-boundary-conditions-on-rectangles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Boundary conditions on rectangles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-geometry-and-embedded-domains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Geometry and embedded domains
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Geometry and embedded domains">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#signed-distance-convention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Signed-distance convention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#masks-and-boundary-bands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Masks and boundary bands
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#current-embedded-domain-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Current embedded-domain paths
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-implementation-and-complexity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Implementation and complexity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-accuracy-and-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Accuracy and scope
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="method">Method<a class="headerlink" href="#method" title="Permanent link">&para;</a></h1>
+<h2 id="1-core-idea">1. Core idea<a class="headerlink" href="#1-core-idea" title="Permanent link">&para;</a></h2>
+<p>OptiXDE treats a differential equation as an operator acting on a field sampled
+on a uniform Cartesian grid. When the linear spatial operator is diagonal in a
+Fourier, sine, or cosine basis, differentiation and time evolution reduce to
+independent operations on spectral modes.</p>
+<p>For</p>
+<div class="arithmatex">\[
+\frac{\partial u}{\partial t}=\mathcal{L}u,
+\]</div>
+<p>let <span class="arithmatex">\(\lambda(\mathbf{k})\)</span> be the spectral symbol of
+<span class="arithmatex">\(\mathcal{L}\)</span>. A linear time step is</p>
+<div class="arithmatex">\[
+\widehat{u}^{\,n+1}(\mathbf{k})
+=
+\underbrace{
+\exp\!\left[\lambda(\mathbf{k})\Delta t\right]
+}_{G(\mathbf{k},\Delta t)}
+\widehat{u}^{\,n}(\mathbf{k}),
+\]</div>
+<p>or, in physical space,</p>
+<div class="arithmatex">\[
+u^{n+1}
+=
+\mathcal{F}^{-1}
+\left[
+G(\mathbf{k},\Delta t)\,
+\mathcal{F}[u^n]
+\right].
+\]</div>
+<p>This transform--propagate--inverse-transform loop is the main computational
+pattern in OptiXDE. It replaces stiffness-matrix assembly with FFTs and
+pointwise spectral multiplication for the rectangular spectral solvers.</p>
+<p><img alt="Spectral propagation pipeline" src="../assets/pipeline.svg" width="900" /></p>
+<div class="admonition note">
+<p class="admonition-title">Role of OptiXDE</p>
+<p>Fourier propagation itself is classical. OptiXDE combines it with reusable
+backends, cached operators, boundary transforms, nonlinear splitting,
+geometry tools, diagnostics, and post-processing in one consistent solver
+interface.</p>
+</div>
+<h2 id="2-discrete-spectral-grid">2. Discrete spectral grid<a class="headerlink" href="#2-discrete-spectral-grid" title="Permanent link">&para;</a></h2>
+<p>For a periodic rectangle
+<span class="arithmatex">\(\widetilde{\Omega}=[0,L_x)\times[0,L_y)\)</span>, the field is stored with shape
+<code>(Ny, Nx)</code> on</p>
+<div class="arithmatex">\[
+x_j=\frac{jL_x}{N_x},
+\qquad
+y_\ell=\frac{\ell L_y}{N_y}.
+\]</div>
+<p>The FFT-ordered angular wave numbers are</p>
+<div class="arithmatex">\[
+k_x=2\pi\,\mathrm{fftfreq}(N_x,L_x/N_x),
+\qquad
+k_y=2\pi\,\mathrm{fftfreq}(N_y,L_y/N_y),
+\]</div>
+<p>and OptiXDE caches the two-dimensional grids and</p>
+<div class="arithmatex">\[
+K^2=k_x^2+k_y^2.
+\]</div>
+<p>The first array axis is <span class="arithmatex">\(y\)</span>, and the second is <span class="arithmatex">\(x\)</span>. NumPy, CuPy, and
+PyTorch backends use the same layout. Cache keys include grid size, domain
+length, dtype, and device, preventing incompatible frequency grids or
+propagators from being reused.</p>
+<h2 id="3-linear-propagation-and-inversion">3. Linear propagation and inversion<a class="headerlink" href="#3-linear-propagation-and-inversion" title="Permanent link">&para;</a></h2>
+<p>The diffusion equation illustrates the basic construction:</p>
+<div class="arithmatex">\[
+\frac{\partial u}{\partial t}=D\Delta u.
+\]</div>
+<p>Fourier transformation gives</p>
+<div class="arithmatex">\[
+\frac{\partial\widehat u}{\partial t}
+=
+-DK^2\widehat u,
+\]</div>
+<p>so each mode can be integrated analytically:</p>
+<div class="arithmatex">\[
+\widehat u^{\,n+1}
+=
+\exp(-DK^2\Delta t)\widehat u^{\,n}.
+\]</div>
+<p>Because the multiplier has magnitude no greater than one for
+<span class="arithmatex">\(D,\Delta t\ge0\)</span>, the constant-coefficient linear diffusion step is
+non-expansive and has no explicit diffusion stability limit.</p>
+<p>Other linear equations use the same structure with a different diagonal
+operator:</p>
+<table>
+<thead>
+<tr>
+<th>Equation</th>
+<th>Spectral treatment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Diffusion <span class="arithmatex">\(u_t=D\Delta u\)</span></td>
+<td><span class="arithmatex">\(\exp(-DK^2\Delta t)\)</span></td>
+</tr>
+<tr>
+<td>Poisson <span class="arithmatex">\(-\Delta u=f\)</span></td>
+<td><span class="arithmatex">\(\widehat u=\widehat f/K^2\)</span>, with the zero mode fixed</td>
+</tr>
+<tr>
+<td>Shifted Helmholtz <span class="arithmatex">\((-\Delta+k_0^2)u=f\)</span></td>
+<td><span class="arithmatex">\(\widehat u=\widehat f/(K^2+k_0^2)\)</span></td>
+</tr>
+<tr>
+<td>Wave <span class="arithmatex">\(u_{tt}=c^2\Delta u\)</span></td>
+<td>exact modal oscillator update for displacement and velocity</td>
+</tr>
+<tr>
+<td>Free Schrödinger <span class="arithmatex">\(\psi_t=ia\Delta\psi\)</span></td>
+<td><span class="arithmatex">\(\exp(-iaK^2\Delta t)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>For periodic Poisson and Neumann Poisson problems, the Laplacian has a constant
+nullspace. OptiXDE can subtract the mean of <span class="arithmatex">\(f\)</span> to enforce compatibility and
+sets the solution zero mode to fix the additive gauge.</p>
+<p>For periodic diffusion with a source, OptiXDE provides an ETD1 update using</p>
+<div class="arithmatex">\[
+\varphi_1(z)=\frac{\exp(z)-1}{z},
+\qquad
+\varphi_1(0)=1,
+\]</div>
+<p>with a stable small-<span class="arithmatex">\(z\)</span> approximation. The source is sampled at the midpoint
+of the step.</p>
+<h2 id="4-nonlinear-equations-and-splitting">4. Nonlinear equations and splitting<a class="headerlink" href="#4-nonlinear-equations-and-splitting" title="Permanent link">&para;</a></h2>
+<p>For</p>
+<div class="arithmatex">\[
+u_t=\mathcal{L}u+\mathcal{N}(u),
+\]</div>
+<p>OptiXDE propagates the constant-coefficient linear part in spectral space and
+evaluates nonlinear products in physical space. This pseudo-spectral approach
+avoids forming convolution sums explicitly:</p>
+<div class="arithmatex">\[
+u=\mathcal{F}^{-1}[\widehat u],
+\qquad
+\widehat{\mathcal{N}}
+=
+\mathcal{F}[\mathcal{N}(u)].
+\]</div>
+<p>The library provides first-order Lie splitting and symmetric second-order
+Strang splitting:</p>
+<div class="arithmatex">\[
+\text{Lie:}\quad
+\Phi_N(\Delta t)\Phi_L(\Delta t),
+\]</div>
+<div class="arithmatex">\[
+\text{Strang:}\quad
+\Phi_L(\Delta t/2)
+\Phi_N(\Delta t)
+\Phi_L(\Delta t/2).
+\]</div>
+<p>Representative implementations are:</p>
+<table>
+<thead>
+<tr>
+<th>Solver</th>
+<th>Linear part</th>
+<th>Physical-space or nonlinear part</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Allen--Cahn</td>
+<td>spectral diffusion</td>
+<td>exact pointwise reaction <span class="arithmatex">\(u-u^3\)</span></td>
+</tr>
+<tr>
+<td>Periodic Burgers</td>
+<td>exact Fourier diffusion half-steps</td>
+<td>conservative convection with Euler or midpoint RK2</td>
+</tr>
+<tr>
+<td>Cubic Schrödinger</td>
+<td>Fourier dispersion half-steps</td>
+<td>exact local nonlinear phase</td>
+</tr>
+<tr>
+<td>Periodic Navier--Stokes</td>
+<td>Fourier viscosity and Poisson inversion</td>
+<td>conservative vorticity flux with Euler or midpoint RK2</td>
+</tr>
+</tbody>
+</table>
+<p>Quadratic nonlinearities can use the two-thirds de-aliasing rule. This removes
+unresolved high-frequency content produced by physical-space multiplication.</p>
+<div class="admonition warning">
+<p class="admonition-title">Linear stability is not complete stability</p>
+<p>An exact linear propagator does not remove timestep restrictions introduced
+by explicit nonlinear terms, operator splitting, embedded-boundary updates,
+or finite-difference substeps. Nonlinear calculations still require
+timestep and resolution studies.</p>
+</div>
+<h2 id="5-boundary-conditions-on-rectangles">5. Boundary conditions on rectangles<a class="headerlink" href="#5-boundary-conditions-on-rectangles" title="Permanent link">&para;</a></h2>
+<p>For coordinate-aligned rectangular domains, OptiXDE selects a transform whose
+basis satisfies the homogeneous boundary condition:</p>
+<table>
+<thead>
+<tr>
+<th>Boundary condition</th>
+<th>Numerical treatment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Periodic</td>
+<td>FFT on an endpoint-excluded grid</td>
+</tr>
+<tr>
+<td>Homogeneous Dirichlet</td>
+<td>DST on the interior of a full endpoint-inclusive grid</td>
+</tr>
+<tr>
+<td>Homogeneous Neumann</td>
+<td>DCT on a full endpoint-inclusive grid</td>
+</tr>
+<tr>
+<td>Robin</td>
+<td>spectral prediction or preconditioning plus local boundary projection</td>
+</tr>
+</tbody>
+</table>
+<p>The DST path returns zero boundary values. The DCT path includes the constant
+mode and therefore exposes the Poisson compatibility and gauge controls.</p>
+<p>Nonhomogeneous Dirichlet Poisson data can be treated by a lifting</p>
+<div class="arithmatex">\[
+u=v+T_b,
+\qquad
+v|_{\partial\Omega}=0,
+\]</div>
+<p>where a Coons patch <span class="arithmatex">\(T_b\)</span> matches the four boundary curves and the homogeneous
+correction <span class="arithmatex">\(v\)</span> is solved with the DST kernel.</p>
+<p>For rectangular Robin data,</p>
+<div class="arithmatex">\[
+\alpha u+\beta\partial_nu=g,
+\]</div>
+<p>the current implementation uses one-sided finite-difference projection on each
+side. Poisson combines this projection with a preconditioned iteration;
+diffusion applies a spectral prediction followed by local boundary
+projections. Homogeneous Dirichlet or Neumann limits are routed to DST or DCT
+when possible.</p>
+<h2 id="6-geometry-and-embedded-domains">6. Geometry and embedded domains<a class="headerlink" href="#6-geometry-and-embedded-domains" title="Permanent link">&para;</a></h2>
+<h3 id="signed-distance-convention">Signed-distance convention<a class="headerlink" href="#signed-distance-convention" title="Permanent link">&para;</a></h3>
+<p>The geometry package uses the <strong>positive-inside</strong> convention:</p>
+<div class="arithmatex">\[
+d(\mathbf{x})&gt;0\ \text{inside }\Omega,\qquad
+d(\mathbf{x})=0\ \text{on }\partial\Omega,\qquad
+d(\mathbf{x})&lt;0\ \text{outside }\Omega.
+\]</div>
+<p>Accordingly,</p>
+<div class="arithmatex">\[
+d_{A\cup B}=\max(d_A,d_B),\qquad
+d_{A\cap B}=\min(d_A,d_B),\qquad
+d_{A\setminus B}=\min(d_A,-d_B).
+\]</div>
+<p>Rectangle, disk, sphere, and polygon primitives can therefore be combined
+without a body-fitted mesh.</p>
+<h3 id="masks-and-boundary-bands">Masks and boundary bands<a class="headerlink" href="#masks-and-boundary-bands" title="Permanent link">&para;</a></h3>
+<p>The hard interior mask is</p>
+<div class="arithmatex">\[
+m_\Omega^0=\mathbf{1}_{d\ge0}.
+\]</div>
+<p>A smooth mask and boundary weight are also available:</p>
+<div class="arithmatex">\[
+m_\Omega
+=
+\frac12
+\left[
+1+\tanh\!\left(\frac{d}{\varepsilon}\right)
+\right],
+\]</div>
+<div class="arithmatex">\[
+w_\Gamma
+=
+\frac{1}{2\varepsilon}
+\operatorname{sech}^2\!\left(\frac{d}{\varepsilon}\right).
+\]</div>
+<p>The smoothing thickness <span class="arithmatex">\(\varepsilon\)</span> is expressed in physical units and is
+typically chosen on the order of one to three grid spacings. Smoothing reduces
+Gibbs-type oscillation from a discontinuous mask, but introduces a finite
+interface layer that must be considered in refinement studies.</p>
+<h3 id="current-embedded-domain-paths">Current embedded-domain paths<a class="headerlink" href="#current-embedded-domain-paths" title="Permanent link">&para;</a></h3>
+<p>The general operator-level form is</p>
+<div class="arithmatex">\[
+u^{n+1}
+=
+\mathcal{E}_{\Omega,\Gamma}
+\left(
+\mathcal{T}_G[u^n]
+\right),
+\]</div>
+<p>where <span class="arithmatex">\(\mathcal{T}_G\)</span> is a propagation step and
+<span class="arithmatex">\(\mathcal{E}_{\Omega,\Gamma}\)</span> applies geometry or boundary constraints in
+physical space.</p>
+<p>The current library exposes two practical routes:</p>
+<ol>
+<li>hard masks, smooth masks, and boundary weights for penalty-style spectral
+   workflows and custom solvers;</li>
+<li>segmented polygon solvers that rasterize Dirichlet, Neumann, and Robin data
+   on Cartesian grids.</li>
+</ol>
+<p>The segmented steady Poisson solver assembles a sparse masked-grid system.
+Transient polygon diffusion and wave utilities use explicit masked finite
+differences. These solvers share OptiXDE's geometry and boundary abstractions,
+but their current numerical kernel is not a pure FFT propagator.</p>
+<h2 id="7-implementation-and-complexity">7. Implementation and complexity<a class="headerlink" href="#7-implementation-and-complexity" title="Permanent link">&para;</a></h2>
+<p>For a periodic linear problem, preprocessing constructs the grid and retrieves
+or creates the frequency arrays and propagation multiplier. Each subsequent
+step performs:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>forward transform
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>→ pointwise spectral propagation
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>→ inverse transform
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>→ optional nonlinear, boundary, geometry, or diagnostic operations
+</code></pre></div>
+<p>Static arrays remain on the selected device. Backend caches reuse frequency
+grids, while <code>PropagatorCache</code> reuses exponential and inverse-<span class="arithmatex">\(K^2\)</span>
+multipliers.</p>
+<p>For <span class="arithmatex">\(N\)</span> grid points, an FFT-based propagation step requires</p>
+<div class="arithmatex">\[
+\mathcal{O}(N\log N)
+\]</div>
+<p>work and</p>
+<div class="arithmatex">\[
+\mathcal{O}(N)
+\]</div>
+<p>memory. Pointwise propagation, nonlinear products, masks, and local boundary
+corrections are <span class="arithmatex">\(\mathcal{O}(N)\)</span> and naturally parallel.</p>
+<p>This complexity applies to the rectangular FFT solvers. The segmented Poisson
+solver additionally solves a sparse system, and the inlet/outlet cylinder-flow
+solver uses a cached sparse pressure factorization.</p>
+<h2 id="8-accuracy-and-scope">8. Accuracy and scope<a class="headerlink" href="#8-accuracy-and-scope" title="Permanent link">&para;</a></h2>
+<p>Smooth periodic problems can exhibit spectral spatial convergence. In practice,
+accuracy may instead be limited by nonsmooth data, geometric corners,
+unresolved nonlinear scales, mask thickness, boundary projection, or
+floating-point precision.</p>
+<p>The spectral core is best suited to uniform Cartesian grids and
+constant-coefficient operators diagonalizable by FFT, DST, or DCT. Variable
+coefficients and irregular interfaces require splitting, correction, or an
+alternative discretization. OptiXDE exposes these paths explicitly rather than
+presenting them as one universally exact propagator.</p>
+<p>For function signatures, backend options, and return contracts, see the
+<a href="../api/">API reference</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/yangylab" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
